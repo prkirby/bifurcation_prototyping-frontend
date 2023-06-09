@@ -2,12 +2,19 @@ import type { MqttClient, IClientOptions } from 'mqtt'
 import MQTT from 'mqtt'
 import { useEffect, useRef } from 'react'
 
+export interface handlerPayload {
+  topic: string,
+  payload: any,
+  packet: any
+}
+
 interface useMqttProps {
   uri: string
   options?: IClientOptions
-  topicHandlers?: { topic: string; handler: (payload: any) => void }[]
+  topicHandlers?: { topic: string; handler: (payload: handlerPayload) => void }[]
   onConnectedHandler?: (client: MqttClient) => void
 }
+
 
 function useMqtt({
   uri,
